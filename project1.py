@@ -1,3 +1,4 @@
+1a
 def next_string(s):
     s = list(s)
 
@@ -9,7 +10,7 @@ def next_string(s):
             s[i] = 'a'
 
     return 'a' * (len(s) + 1)
-Amane
+1b
 def is_wavy(s):
     for i in range(len(s)-1):
         if i % 2 == 0:
@@ -26,7 +27,7 @@ def next_wavy(s):
     while not is_wavy(s):
         s = next_string(s)
     return s
-Amane
+1c
 def count_wavy_before(s):
     cur = 'a' * len(s)
     count = 0
@@ -37,9 +38,7 @@ def count_wavy_before(s):
         cur = next_string(cur)
 
     return count
-Amane
-from itertools import product
-
+1d
 def count_contains(n, sub):
     letters = ['a','b','c','d']
     count = 0
