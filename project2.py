@@ -1,20 +1,4 @@
-bài 2 phần 1
 def product(M, N):
-    p11 = M[0][0] * N[0][0] + M[0][1] * N[1][0]
-    p12 = M[0][0] * N[0][1] + M[0][1] * N[1][1]
-    p21 = M[1][0] * N[0][0] + M[1][1] * N[1][0]
-    p22 = M[1][0] * N[0][1] + M[1][1] * N[1][1]
-    return [[p11, p12], [p21, p22]]
-
-
-if __name__ == "__main__":
-    A = [[3, -4], [2, -1]]
-    B = [[2, -3], [1, 4]]
-    C = product(A, B)
-    print(C[0])
-    print(C[1])
-bài 2 phần 2 
-    def product(M, N):
     p11 = M[0][0] * N[0][0] + M[0][1] * N[1][0]
     p12 = M[0][0] * N[0][1] + M[0][1] * N[1][1]
     p21 = M[1][0] * N[0][0] + M[1][1] * N[1][0]
@@ -56,9 +40,24 @@ def tinh_An_Bn(n):
     return An, Bn
 
 if __name__ == "__main__":
-    n = int(input())
+    print("PROBLEM 2 - MAD101")
+    print("Cau 1: product(M, N)")
+    A_test = [[3, -4], [2, -1]]
+    B_test = [[2, -3], [1, 4]]
+    C = product(A_test, B_test)
+    print(A_test[0])
+    print(A_test[1])
+    print(B_test[0])
+    print(B_test[1])
+    print("A * B =")
+    print(C[0])
+    print(C[1])
+    print("\nCau 2: tinh An va Bn")
+    n = int(input("Nhap n: "))
     An, Bn = tinh_An_Bn(n)
+    print("An =")
     print(An[0])
     print(An[1])
+    print("Bn =")
     print(Bn[0])
     print(Bn[1])
