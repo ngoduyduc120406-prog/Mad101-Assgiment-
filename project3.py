@@ -1,42 +1,50 @@
-def is_wavy(s):
-    if len(s) < 2:
-        return True
-    for i in range(len(s)-1):
-        if i % 2 == 0:
-            if s[i] >= s[i+1]:
-                return False
-        else:
-            if s[i] <= s[i+1]:
-                return False
-    return True
+def get_knight_positions(m, n, i, j):
+    deltas = [(1,2),(1,-2),(-1,2),(-1,-2),(2,1),(2,-1),(-2,1),(-2,-1)]
+    res = []
+    for di,dj in deltas:
+        ni = i + di
+        nj = j + dj
+        if 0 <= ni < m and 0 <= nj < n:
+            res.append((ni,nj))
+    return res
 
-def count_wavy_before(s):
-    k = len(s)
-    if k == 0:
-        return 0
-    def rec(pos, prev, tight):
-        if pos == k:
-            return 1
-        res = 0
-        upper = s[pos] if tight == 1 else 'd'
-        for ch in 'abcd':
-            if ch > upper:
-                continue
-            if pos > 0:
-                if (pos - 1) % 2 == 0:
-                    if prev >= ch:
-                        continue
-                else:
-                    if prev <= ch:
-                        continue
-            new_tight = 1 if tight == 1 and ch == s[pos] else 0
-            res += rec(pos + 1, ch, new_tight)
-        return res
-    total = rec(0, '', 1)
-    if is_wavy(s):
-        total -= 1
-    return total
+def find_min_knight_sum(A):
+    m = len(A)
+    if m == 0:
+        return None, None, None
+    nn = len(A[0])
+    min_sum = 999999999
+    best1 = None
+    best2 = None
+    for i in range(m):
+        for j in range(nn):
+            neigh = get_knight_positions(m, nn, i, j)
+            for ni,nj in neigh:
+                if (i < ni) or (i == ni and j < nj):
+                    sm = A[i][j] + A[ni][nj]
+                    if sm < min_sum:
+                        min_sum = sm
+                        best1 = (i,j)
+                        best2 = (ni,nj)
+    return best1, best2, min_sum
+
+def compute_f(n):
+    max_sum = -999999999
+    deltas = [(1,2),(1,-2),(-1,2),(-1,-2),(2,1),(2,-1),(-2,1),(-2,-1)]
+    for i in range(1, n+1):
+        for j in range(1, n+1):
+            for di,dj in deltas:
+                ni = i + di
+                nj = j + dj
+                if 1 <= ni <= n and 1 <= nj <= n:
+                    aij = ((-1)**i * (i*i - i)) + ((-1)**j * (j*j - j + 1))
+                    anj = ((-1)**ni * (ni*ni - ni)) + ((-1)**nj * (nj*nj - nj + 1))
+                    sm = aij + anj
+                    if sm > max_sum:
+                        max_sum = sm
+    return max_sum
 
 if __name__ == "__main__":
-    s = input().strip()
-    print(count_wavy_before(s))
+    print("PROBLEM 3 - MAD101")
+    print("Cau 3.3: f(1000) mod 7001")
+    print(compute_f(1000) % 7001)
